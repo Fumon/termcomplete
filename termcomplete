@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ ! -s ~/.termcomplete ]; then
+  echo "Missing ~/.termcomplete."
+  echo "Create it and add your pushover APP_TOKEN and USER_KEY on separate lines as environment variables"
+  exit 1
+fi
+
+source ~/.termcomplete
+
+# Use curl to send a message once finished
+curl -s \
+	-F "token=${APP_TOKEN}" \
+	-F "user=${USER_KEY}" \
+	-F "message=Task Done" \
+	https://api.pushover.net/1/messages.json
